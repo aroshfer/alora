@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+/* ------------------------------------------------------------------ */
+/*  Luxury design tokens — single source of truth for the palette      */
+/* ------------------------------------------------------------------ */
+:root {
+  --ivory: #F6F1E6;      /* warm cream page background */
+  --paper: #FFFDF7;      /* warm off-white surfaces (cards, header) */
+  --ink: #15130F;        /* deep warm charcoal-black — text & dark surfaces */
+  --sage: #2E4A3D;       /* deep emerald — primary accent */
+  --sage-dark: #1C332A;  /* darker emerald — buttons, bands, hover */
+  --peach: #C9A463;      /* antique gold — accents, sale/CTA highlights */
+  --peach-dark: #9C7935; /* deep gold — hover, emphasis */
+  --blush: #EFE4CE;      /* soft champagne — light tinted surfaces */
+  --line: #E4D8BE;       /* warm brass-tinted border */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--ivory);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--peach);
+  color: var(--ink);
+}
+
+/* slim gold-tinted scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--peach);
+  border-radius: 10px;
+  border: 2px solid var(--ivory);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--peach-dark);
+}
