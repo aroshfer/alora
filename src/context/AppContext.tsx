@@ -252,6 +252,9 @@ const AppContext = createContext<Ctx>(null as any);
 
 export const useApp = () => useContext(AppContext);
 
+// Alias — some components import `useAppContext` instead of `useApp`.
+export const useAppContext = useApp;
+
 // ── Provider ──────────────────────────────────────────────────────────────
 export function AppProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, INITIAL);
