@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, Heart, ShoppingBag, User } from "lucide-react";
+import { Menu, Search, Heart, ShoppingBag, User, LayoutDashboard } from "lucide-react";
 import NavBar from "./NavBar";
 import { useAppContext } from "../context/AppContext";
 import { useAuth } from "../context/AuthContext";
@@ -39,6 +39,11 @@ export default function Header({ onMobileOpen }: HeaderProps) {
           />
         </form>
         <div className="header-icons">
+          {user?.isAdmin && (
+            <Link className="icon-btn" to="/admin" aria-label="Admin dashboard">
+              <LayoutDashboard size={20} />
+            </Link>
+          )}
           <Link className="icon-btn" to={user ? "/account" : "/login"} aria-label={user ? "Account" : "Sign in"}>
             <User size={20} />
           </Link>

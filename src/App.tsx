@@ -5,6 +5,7 @@ import { AppProvider, useAppContext } from "./context/AppContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { RouteLoader } from "./components/pages/RouteLoader";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import TrustBar from "./components/TrustBar";
 import Header from "./components/Header";
 import MobileMenu from "./components/MobileMenu";
@@ -23,6 +24,10 @@ const Signup = lazy(() => import("./components/pages/Signup"));
 const Account = lazy(() => import("./components/pages/Account"));
 const Checkout = lazy(() => import("./components/pages/Checkout"));
 const OrderConfirmation = lazy(() => import("./components/pages/OrderConfirmation"));
+const AdminLayout = lazy(() => import("./components/pages/admin/AdminLayout"));
+const AdminOverview = lazy(() => import("./components/pages/admin/AdminOverview"));
+const AdminOrders = lazy(() => import("./components/pages/admin/AdminOrders"));
+const AdminCustomers = lazy(() => import("./components/pages/admin/AdminCustomers"));
 const NotFound = lazy(() => import("./components/pages/NotFound"));
 
 function AppShell() {
@@ -82,6 +87,18 @@ function AppShell() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <AdminLayout />
+                </AdminRoute>
+              }
+            >
+              <Route index element={<AdminOverview />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="customers" element={<AdminCustomers />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </RouteLoader>

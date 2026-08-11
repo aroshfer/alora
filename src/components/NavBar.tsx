@@ -7,11 +7,6 @@ export default function NavBar() {
   return (
     <nav className="navbar">
       <div className="nav-inner">
-        <div className="nav-item">
-          <Link to="/shop" style={{ padding: "13px 16px", display: "block", fontSize: 13.5, fontWeight: 600 }}>
-            All Products
-          </Link>
-        </div>
         {CATEGORIES.map((c) => {
           const products = PRODUCTS.filter((p) => p.cat === c.id);
           return (
@@ -36,6 +31,11 @@ export default function NavBar() {
             </div>
           );
         })}
+        <div className="nav-item">
+          <Link to="/shop" style={{ padding: "13px 16px", display: "block", fontSize: 13.5, fontWeight: 600 }}>
+            All Products
+          </Link>
+        </div>
         <div className="nav-item">
           <Link to="/journal" style={{ padding: "13px 16px", display: "block", fontSize: 13.5, fontWeight: 600 }}>
             Journal

@@ -61,7 +61,7 @@ For example:
 
 ```bash
 git add .
-git commit -m "Update Alora UI"
+git commit -m "Initial commit"
 git push
 ```
 

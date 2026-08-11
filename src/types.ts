@@ -1,125 +1,142 @@
-// ── Agent ─────────────────────────────────────────────────────────────────
-export interface Agent {
-  id:          string;
-  hostname:    string;
-  os:          string;
-  os_version?: string;
-  arch?:       string;
-  ip:          string;
-  online:      boolean;
-  lastSeen:    string;
-  cpu:         number;
-  mem:         number;
-  disk?:       number;
-  version:     string;
-  tags?:       string[];
-  enrolledAt?: string;
+import type { LucideIcon } from "lucide-react";
+
+export type ThemeColor = "sage" | "blush" | "peach";
+export type ProductTag = "new" | "sale" | "bestseller" | null;
+
+export interface Category {
+  id: string;
+  name: string;
+  icon: LucideIcon;
+  sub: string[];
 }
 
-// ── Alert ─────────────────────────────────────────────────────────────────
-export type AlertSeverity = "critical" | "high" | "medium" | "low";
-export type AlertStatus   = "new" | "investigating" | "resolved" | "false_positive";
-
-export interface Alert {
-  id:            string;
-  title:         string;
-  name?:         string;
-  severity:      AlertSeverity;
-  host?:         string;
-  agent_id?:     string;
-  process?:      string;
-  exe?:          string;
-  cmdline?:      string;
-  technique?:    string;
-  tacticId?:     string;
-  score?:        number;
-  time:          string;
-  pid?:          number;
-  remote_ip?:    string;
-  remote_port?:  number;
-  file_path?:    string;
-  file_hash?:    string;
-  reg_key?:      string;
-  user?:         string;
-  parent?:       string;
-  status:        AlertStatus;
-  event_type?:   string;
+export interface Product {
+  id: number;
+  name: string;
+  cat: string;
+  price: number;
+  old?: number | null;
+  rating: number;
+  reviews: number;
+  tag?: ProductTag;
+  icon: LucideIcon;
+  theme: ThemeColor;
+  soldOut?: boolean;
 }
 
-// ── Incident ──────────────────────────────────────────────────────────────
-export type IncidentStatus = "open" | "investigating" | "contained" | "resolved";
-
-export interface Incident {
-  id:           string;
-  title:        string;
-  severity:     AlertSeverity;
-  status:       IncidentStatus;
-  host?:        string;
-  agent_id?:    string;
-  alerts?:      number;
-  createdAt:    string;
-  updatedAt:    string;
-  description?: string;
-  techniques?:  string[];
-  tactics?:     string[];
+export interface CartItem extends Product {
+  qty: number;
 }
 
-// ── Raw telemetry event (from agent → server → dashboard) ──────────────────
-export interface RawEvent {
-  type:          string;
-  hostname:      string;
-  agent_id?:     string;
-  server_ts?:    string;
-  timestamp?:    string;
-  pid?:          number;
-  process?:      string;
-  cmdline?:      string;
-  exe?:          string;
-  parent?:       string;
-  ppid?:         number;
-  user?:         string;
-  cpu_percent?:  number;
-  mem_percent?:  number;
-  file_hash?:    string;
-  file_path?:    string;
-  file_name?:    string;
-  executable?:   boolean;
-  file_size?:    number;
-  registry_key?: string;
-  local_ip?:     string;
-  local_port?:   number;
-  remote_ip?:    string;
-  remote_port?:  number;
-  protocol?:     string;
-  description?:  string;
-  score?:        number;
+export interface HeroSlide {
+  eyebrow: string;
+  title: string;
+  sub: string;
+  cta: string;
 }
 
-// ── Server stats broadcast ──────────────────────────────────────────────────
-export interface StatsMsg {
-  type:       "stats";
-  time:       string;
-  agents:     number;
-  alerts:     number;
-  critical:   number;
-  incidents:  number;
-  events:     number;
+export interface ReviewItem {
+  name: string;
+  text: string;
+  initial: string;
 }
 
-// ── Live terminal output ────────────────────────────────────────────────────
-export interface TerminalOutput {
-  agent_id:  string;
-  hostname?: string;
-  output:    string;
-  cmd?:      string;
-  time:      string;
+export interface JournalPost {
+  title: string;
+  date: string;
 }
 
-// ── Alert timeline bucket (per-minute severity counts) ──────────────────────
-export interface AlertBucket {
-  minute:   string;
-  critical: number;
-  high:     number;
-  medium:   number;
-  low:      number;
+export interface Address {
+  id: string;
+  label: string;
+  line1: string;
+  line2: string;
+  city: string;
+  postalCode: string;
+  country: string;
+  isDefault: boolean;
+}
+
+export interface SavedPaymentMethod {
+  id: string;
+  token: string;
+  brand: string;
+  last4: string;
+  expMonth: number;
+  expYear: number;
+  cardholderName: string;
+  isDefault: boolean;
+}
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  fullName: string;
+  phone: string;
+  addresses: Address[];
+  paymentMethods: SavedPaymentMethod[];
+  isAdmin: boolean;
+  createdAt: string;
+}
+
+export interface OrderItem {
+  productId: number;
+  name: string;
+  price: number;
+  qty: number;
+}
+
+export interface Order {
+  id: string;
+  userId: string;
+  items: OrderItem[];
+  subtotal: number;
+  shipping: number;
+  total: number;
+  shippingAddress: Address;
+  paymentSummary: { brand: string; last4: string };
+  authorizationId: string;
+  status: string;
+  createdAt: string;
+}
+
+export interface AdminRevenueDay {
+  date: string;
+  revenue: number;
+  orders: number;
+}
+
+export interface AdminTopProduct {
+  name: string;
+  qty: number;
+  revenue: number;
+}
+
+export interface AdminRecentOrder {
+  id: string;
+  total: number;
+  itemCount: number;
+  createdAt: string;
+  customerName: string;
+}
+
+export interface AdminStats {
+  totalRevenue: number;
+  totalOrders: number;
+  avgOrderValue: number;
+  totalCustomers: number;
+  revenueByDay: AdminRevenueDay[];
+  topProducts: AdminTopProduct[];
+  recentOrders: AdminRecentOrder[];
+}
+
+export interface AdminOrder extends Order {
+  customerName: string;
+  customerEmail: string;
+}
+
+export interface AdminCustomer extends User {
+  orderCount: number;
+  totalSpent: number;
 }
