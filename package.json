@@ -1,29 +1,22 @@
 {
-  "name": "alora",
+  "name": "alora-server",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "make-admin": "node src/scripts/setAdmin.js"
   },
   "dependencies": {
-    "lucide-react": "^0.383.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
-    "recharts": "^2.12.7"
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "typescript": "^5.5.3",
-    "vite": "^5.3.4"
-  },
-  "allowScripts": {
-    "esbuild@0.21.5": true,
-    "fsevents@2.3.3": true
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "lowdb": "^7.0.1",
+    "uuid": "^9.0.1"
   }
 }
